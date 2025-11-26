@@ -1,13 +1,19 @@
-import { useEffect, useState } from 'react'
-import { motion } from 'framer-motion'
+import { useEffect } from 'react'
+import { motion, useMotionValue, useSpring } from 'framer-motion'
 import './Cursor.css'
 
 const Cursor = () => {
-  const [mousePosition, setMousePosition] = useState({ x: 0, y: 0 })
+  const cursorX = useMotionValue(-100)
+  const cursorY = useMotionValue(-100)
+
+  const springConfig = { damping: 20, stiffness: 500, mass: 0.5 }
+  const cursorXSpring = useSpring(cursorX, springConfig)
+  const cursorYSpring = useSpring(cursorY, springConfig)
 
   useEffect(() => {
     const updateMousePosition = (e) => {
-      setMousePosition({ x: e.clientX, y: e.clientY })
+      cursorX.set(e.clientX - 20)
+      cursorY.set(e.clientY - 20)
     }
 
     window.addEventListener('mousemove', updateMousePosition)
@@ -20,15 +26,9 @@ const Cursor = () => {
   return (
     <motion.div
       className="cursor-follower"
-      animate={{
-        x: mousePosition.x - 20,
-        y: mousePosition.y - 20,
-      }}
-      transition={{
-        type: "spring",
-        damping: 25,
-        stiffness: 300,
-        mass: 0.5
+      style={{
+        x: cursorXSpring,
+        y: cursorYSpring,
       }}
     />
   )

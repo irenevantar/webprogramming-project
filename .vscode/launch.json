@@ -2,19 +2,20 @@
   "version": "0.2.0",
   "configurations": [
     {
-      "type": "msedge",
+      "type": "pwa-msedge",
       "request": "launch",
       "name": "🚀 Vite Dev Server (Edge)",
-      "url": "http://localhost:3000/webprogramming-project/",
+      "url": "http://localhost:3000/",
       "webRoot": "${workspaceFolder}",
       "sourceMaps": true,
+      "userDataDir": "${workspaceFolder}/.vscode/edge-debug-profile",
       "preLaunchTask": "pnpm: dev"
     },
     {
       "type": "chrome",
       "request": "launch",
       "name": "🚀 Vite Dev Server (Chrome)",
-      "url": "http://localhost:3000/webprogramming-project/",
+      "url": "http://localhost:3000/",
       "webRoot": "${workspaceFolder}",
       "sourceMaps": true
     }

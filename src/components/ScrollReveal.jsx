@@ -32,59 +32,46 @@ const ScrollReveal = ({
     const el = containerRef.current
     if (!el) return
 
-    gsap.fromTo(
+    const charElements = el.querySelectorAll('.char')
+    
+    const tl = gsap.timeline({
+      scrollTrigger: {
+        trigger: el,
+        start: 'top 85%',
+        end: '+=300', // Fixed scroll distance for consistent speed
+        scrub: 1,
+      }
+    })
+
+    // Container rotation
+    tl.fromTo(
       el,
       { transformOrigin: '0% 50%', rotate: baseRotation },
-      {
-        ease: 'none',
-        rotate: 0,
-        scrollTrigger: {
-          trigger: el,
-          start: 'top bottom',
-          end: 'bottom center',
-          scrub: 1,
-        },
-      }
+      { rotate: 0, ease: 'none', duration: 1 },
+      0
     )
 
-    const charElements = el.querySelectorAll('.char')
-
-    gsap.fromTo(
+    // Char opacity
+    tl.fromTo(
       charElements,
       { opacity: baseOpacity, willChange: 'opacity' },
-      {
-        ease: 'none',
-        opacity: 1,
-        stagger: 0.05,
-        scrollTrigger: {
-          trigger: el,
-          start: 'top bottom-=10%',
-          end: 'bottom center',
-          scrub: 1,
-        },
-      }
+      { opacity: 1, stagger: 0.02, ease: 'none', duration: 1 },
+      0
     )
 
+    // Char blur
     if (enableBlur) {
-      gsap.fromTo(
+      tl.fromTo(
         charElements,
         { filter: `blur(${blurStrength}px)` },
-        {
-          ease: 'none',
-          filter: 'blur(0px)',
-          stagger: 0.05,
-          scrollTrigger: {
-            trigger: el,
-            start: 'top bottom-=10%',
-            end: 'bottom center',
-            scrub: 1,
-          },
-        }
+        { filter: 'blur(0px)', stagger: 0.02, ease: 'none', duration: 1 },
+        0
       )
     }
 
     return () => {
-      ScrollTrigger.getAll().forEach((trigger) => trigger.kill())
+      if (tl.scrollTrigger) tl.scrollTrigger.kill()
+      tl.kill()
     }
   }, [enableBlur, baseRotation, baseOpacity, blurStrength])
 

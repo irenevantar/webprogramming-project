@@ -3,7 +3,7 @@
   "tasks": [
     {
       "type": "shell",
-      "command": "$env:Path = [System.Environment]::GetEnvironmentVariable('Path','Machine') + ';' + [System.Environment]::GetEnvironmentVariable('Path','User'); pnpm dev",
+      "command": "$port=3000; $tcp = Get-NetTCPConnection -LocalPort $port -ErrorAction SilentlyContinue; if ($tcp) { $tcp | ForEach-Object { Stop-Process -Id $_.OwningProcess -Force }; Start-Sleep -Seconds 1 }; pnpm dev",
       "problemMatcher": [
         {
           "pattern": [
@@ -16,8 +16,8 @@
           ],
           "background": {
             "activeOnStart": true,
-            "beginsPattern": "^.*VITE v.*  ready in.*$",
-            "endsPattern": "^.*Local:.*http://localhost:.*$"
+            "beginsPattern": "VITE v",
+            "endsPattern": "http://localhost:[0-9]+"
           }
         }
       ],
@@ -26,13 +26,7 @@
       "isBackground": true,
       "presentation": {
         "reveal": "always",
-        "panel": "new"
-      },
-      "options": {
-        "shell": {
-          "executable": "powershell.exe",
-          "args": ["-Command"]
-        }
+        "panel": "dedicated"
       }
     }
   ]
