@@ -40,7 +40,7 @@ const Loader = () => {
       <div style={{ textAlign: 'center' }}>
         {/* Pochita GIF */}
         <motion.img
-          src="/webprogramming-project/assets/images/pochita.gif"
+          src={`${import.meta.env.BASE_URL}assets/images/pochita.gif`}
           alt="Pochita Loading"
           width="120"
           height="120"

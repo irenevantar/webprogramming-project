@@ -4,7 +4,23 @@
     {
       "type": "shell",
       "command": "$env:Path = [System.Environment]::GetEnvironmentVariable('Path','Machine') + ';' + [System.Environment]::GetEnvironmentVariable('Path','User'); pnpm dev",
-      "problemMatcher": [],
+      "problemMatcher": [
+        {
+          "pattern": [
+            {
+              "regexp": ".",
+              "file": 1,
+              "location": 2,
+              "message": 3
+            }
+          ],
+          "background": {
+            "activeOnStart": true,
+            "beginsPattern": "^.*VITE v.*  ready in.*$",
+            "endsPattern": "^.*Local:.*http://localhost:.*$"
+          }
+        }
+      ],
       "label": "pnpm: dev",
       "detail": "vite",
       "isBackground": true,

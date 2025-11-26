@@ -280,7 +280,7 @@ font-size: clamp(1rem, 2vw, 1.125rem);
 ```javascript
 // vite.config.js
 export default defineConfig({
-  base: '/webprogramming/',  // GitHub Pages base path
+  base: '/webprogramming-project/',  // GitHub Pages base path
   publicDir: 'public',        // 정적 파일 경로
   server: {
     port: 3000,               // 개발 서버 포트

@@ -5,15 +5,16 @@
       "type": "msedge",
       "request": "launch",
       "name": "🚀 Vite Dev Server (Edge)",
-      "url": "http://localhost:3000",
+      "url": "http://localhost:3000/webprogramming-project/",
       "webRoot": "${workspaceFolder}",
-      "sourceMaps": true
+      "sourceMaps": true,
+      "preLaunchTask": "pnpm: dev"
     },
     {
       "type": "chrome",
       "request": "launch",
       "name": "🚀 Vite Dev Server (Chrome)",
-      "url": "http://localhost:3004/webprogramming-project/",
+      "url": "http://localhost:3000/webprogramming-project/",
       "webRoot": "${workspaceFolder}",
       "sourceMaps": true
     }
