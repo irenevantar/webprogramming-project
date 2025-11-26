@@ -228,10 +228,7 @@ const CharacterSection = ({ character, index, isReversed }) => {
               fontWeight: 900,
               lineHeight: 1,
               letterSpacing: '-0.02em',
-              background: 'linear-gradient(135deg, #c4b5fd, #5eead4)',
-              WebkitBackgroundClip: 'text',
-              WebkitTextFillColor: 'transparent',
-              backgroundClip: 'text',
+              color: '#5eead4',
               marginBottom: '1rem',
             }}
           >
