@@ -11,16 +11,18 @@ const ScrollReveal = ({
   baseRotation = 3,
   blurStrength = 4,
   className = '',
+  style = {},
+  as: Component = 'div',
 }) => {
   const containerRef = useRef(null)
 
   const splitText = useMemo(() => {
     const text = typeof children === 'string' ? children : ''
-    return text.split(/(\s+)/).map((word, index) => {
-      if (word.match(/^\s+$/)) return word
+    return text.split('').map((char, index) => {
+      if (char === ' ') return ' '
       return (
-        <span className="word" key={index} style={{ display: 'inline-block' }}>
-          {word}
+        <span className="char" key={index} style={{ display: 'inline-block' }}>
+          {char}
         </span>
       )
     })
@@ -39,16 +41,16 @@ const ScrollReveal = ({
         scrollTrigger: {
           trigger: el,
           start: 'top bottom',
-          end: 'bottom bottom',
-          scrub: true,
+          end: 'bottom center',
+          scrub: 1,
         },
       }
     )
 
-    const wordElements = el.querySelectorAll('.word')
+    const charElements = el.querySelectorAll('.char')
 
     gsap.fromTo(
-      wordElements,
+      charElements,
       { opacity: baseOpacity, willChange: 'opacity' },
       {
         ease: 'none',
@@ -56,16 +58,16 @@ const ScrollReveal = ({
         stagger: 0.05,
         scrollTrigger: {
           trigger: el,
-          start: 'top bottom-=20%',
-          end: 'bottom bottom',
-          scrub: true,
+          start: 'top bottom-=10%',
+          end: 'bottom center',
+          scrub: 1,
         },
       }
     )
 
     if (enableBlur) {
       gsap.fromTo(
-        wordElements,
+        charElements,
         { filter: `blur(${blurStrength}px)` },
         {
           ease: 'none',
@@ -73,9 +75,9 @@ const ScrollReveal = ({
           stagger: 0.05,
           scrollTrigger: {
             trigger: el,
-            start: 'top bottom-=20%',
-            end: 'bottom bottom',
-            scrub: true,
+            start: 'top bottom-=10%',
+            end: 'bottom center',
+            scrub: 1,
           },
         }
       )
@@ -87,9 +89,9 @@ const ScrollReveal = ({
   }, [enableBlur, baseRotation, baseOpacity, blurStrength])
 
   return (
-    <div ref={containerRef} className={className}>
+    <Component ref={containerRef} className={className} style={style}>
       {splitText}
-    </div>
+    </Component>
   )
 }
 

@@ -1,0 +1,19 @@
+.cursor-follower {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 40px;
+  height: 40px;
+  border: 2px solid #5eead4;
+  border-radius: 50%;
+  pointer-events: none;
+  z-index: 9999;
+  mix-blend-mode: difference;
+  transform: translate(-50%, -50%);
+}
+
+@media (hover: none) and (pointer: coarse) {
+  .cursor-follower {
+    display: none;
+  }
+}

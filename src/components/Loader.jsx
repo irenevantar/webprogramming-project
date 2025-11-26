@@ -1,5 +1,6 @@
 import { motion } from 'framer-motion'
 import { useState, useEffect } from 'react'
+import ShinyText from './ShinyText'
 
 const Loader = () => {
   const [progress, setProgress] = useState(0)
@@ -37,90 +38,36 @@ const Loader = () => {
       }}
     >
       <div style={{ textAlign: 'center' }}>
-        {/* Chainsaw Animation */}
-        <motion.svg
+        {/* Pochita GIF */}
+        <motion.img
+          src="/webprogramming-project/assets/images/pochita.gif"
+          alt="Pochita Loading"
           width="120"
           height="120"
-          viewBox="0 0 120 120"
-          fill="none"
-          style={{ margin: '0 auto 2rem' }}
-        >
-          {/* Chainsaw Body */}
-          <motion.rect
-            x="20"
-            y="50"
-            width="80"
-            height="20"
-            rx="4"
-            fill="#5eead4"
-            initial={{ opacity: 0.3 }}
-            animate={{ opacity: [0.3, 1, 0.3] }}
-            transition={{ duration: 1, repeat: Infinity }}
-          />
-          
-          {/* Chainsaw Handle */}
-          <motion.rect
-            x="15"
-            y="40"
-            width="15"
-            height="40"
-            rx="3"
-            fill="#c4b5fd"
-          />
-          
-          {/* Chainsaw Teeth */}
-          {[...Array(8)].map((_, i) => (
-            <motion.rect
-              key={i}
-              x={25 + i * 10}
-              y="48"
-              width="6"
-              height="6"
-              fill="#ffffff"
-              initial={{ y: 48 }}
-              animate={{ y: [48, 52, 48] }}
-              transition={{
-                duration: 0.3,
-                repeat: Infinity,
-                delay: i * 0.1,
-              }}
-            />
-          ))}
-          
-          {/* Spark Effect */}
-          <motion.circle
-            cx="100"
-            cy="60"
-            r="4"
-            fill="#5eead4"
-            initial={{ opacity: 0, scale: 0 }}
-            animate={{
-              opacity: [0, 1, 0],
-              scale: [0, 1.5, 0],
-              x: [0, 20, 0],
-            }}
-            transition={{
-              duration: 1,
-              repeat: Infinity,
-              repeatDelay: 0.5,
-            }}
-          />
-        </motion.svg>
+          style={{ margin: '0 auto 2rem', display: 'block', objectFit: 'contain' }}
+          initial={{ opacity: 0, scale: 0.8 }}
+          animate={{ opacity: 1, scale: 1 }}
+          transition={{ duration: 0.5 }}
+        />
         
         <motion.div
-          style={{
-            fontFamily: "'Space Mono', monospace",
-            fontWeight: 700,
-            fontSize: '1.125rem',
-            color: '#5eead4',
-            letterSpacing: '0.1em',
-            marginTop: '1rem',
-          }}
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
           transition={{ delay: 0.2 }}
+          style={{ marginTop: '1rem' }}
         >
-          CHAINSAW LOADING...
+          <ShinyText 
+            text="CHAINSAW LOADING..." 
+            speed={3}
+            style={{
+              '--shiny-color': 'rgba(249, 115, 22, 0.4)',
+              '--shiny-shimmer-color': '#a855f7',
+              fontFamily: "'Space Mono', monospace",
+              fontWeight: 700,
+              fontSize: '1.125rem',
+              letterSpacing: '0.1em',
+            }}
+          />
         </motion.div>
         
         {/* Progress Bar */}
@@ -128,7 +75,7 @@ const Loader = () => {
           style={{
             width: '200px',
             height: '4px',
-            background: 'rgba(94, 234, 212, 0.2)',
+            background: 'rgba(249, 115, 22, 0.2)',
             borderRadius: '2px',
             margin: '1rem auto 0.5rem',
             overflow: 'hidden',
@@ -137,7 +84,7 @@ const Loader = () => {
           <motion.div
             style={{
               height: '100%',
-              background: 'linear-gradient(90deg, #5eead4, #c4b5fd)',
+              background: 'linear-gradient(90deg, #f97316, #a855f7)',
               borderRadius: '2px',
             }}
             initial={{ width: '0%' }}
@@ -151,7 +98,7 @@ const Loader = () => {
             fontFamily: "'Space Mono', monospace",
             fontWeight: 400,
             fontSize: '0.875rem',
-            color: '#a78bfa',
+            color: '#a855f7',
             letterSpacing: '0.1em',
           }}
         >

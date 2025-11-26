@@ -1,6 +1,7 @@
 import { motion, AnimatePresence } from 'framer-motion'
 import { useInView } from 'framer-motion'
 import { useRef, useState } from 'react'
+import ScrollReveal from './ScrollReveal'
 import rezePosterImg from '/assets/images/reze-poster.jpg'
 import rezePoster2Img from '/assets/images/reze-poster-2.jpg'
 import rezePoster3Img from '/assets/images/reze-poster-3.png'
@@ -53,7 +54,10 @@ const GalleryItem = ({ index, image, onClick }) => {
             <circle cx="30" cy="30" r="8" stroke="currentColor" strokeWidth="2" />
             <path d="M10 60 L30 40 L50 55 L70 35 L70 70 L10 70 Z" fill="currentColor" opacity="0.3" />
           </svg>
-          <p
+          <ScrollReveal
+            as="p"
+            baseRotation={2}
+            enableBlur={true}
             style={{
               fontSize: '0.875rem',
               fontWeight: 700,
@@ -63,7 +67,7 @@ const GalleryItem = ({ index, image, onClick }) => {
             }}
           >
             이미지를 추가하세요
-          </p>
+          </ScrollReveal>
         </div>
       )}
     </motion.div>
@@ -97,23 +101,26 @@ const Gallery = () => {
             padding: '0 2rem',
           }}
         >
-        <motion.h2
-          ref={ref}
-          initial={{ opacity: 0, y: 30 }}
-          animate={isInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 30 }}
-          transition={{ duration: 0.5 }}
+        <h2
           style={{
             fontSize: 'clamp(2.5rem, 6vw, 4rem)',
             fontWeight: 900,
             letterSpacing: '0.02em',
             marginBottom: '4rem',
             textAlign: 'center',
+            display: 'flex',
+            justifyContent: 'center',
+            alignItems: 'center',
+            gap: '1rem',
+            color: '#fff'
           }}
         >
-          <span style={{ color: '#5eead4', margin: '0 0.5rem' }}>[</span>
-          GALLERY
-          <span style={{ color: '#5eead4', margin: '0 0.5rem' }}>]</span>
-        </motion.h2>
+          <span style={{ color: '#5eead4' }}>[</span>
+          <ScrollReveal as="span" baseRotation={5} enableBlur={true}>
+            GALLERY
+          </ScrollReveal>
+          <span style={{ color: '#5eead4' }}>]</span>
+        </h2>
 
         <div
           style={{

@@ -219,7 +219,10 @@ const CharacterSection = ({ character, index, isReversed }) => {
           </motion.div>
 
           {/* 이름 */}
-          <motion.h2
+          <ScrollReveal
+            as="h2"
+            baseRotation={5}
+            enableBlur={true}
             style={{
               fontSize: 'clamp(3rem, 6vw, 5rem)',
               fontWeight: 900,
@@ -233,10 +236,13 @@ const CharacterSection = ({ character, index, isReversed }) => {
             }}
           >
             {character.name}
-          </motion.h2>
+          </ScrollReveal>
 
           {/* 역할 */}
-          <motion.p
+          <ScrollReveal
+            as="p"
+            baseRotation={3}
+            enableBlur={true}
             style={{
               fontFamily: "'Space Mono', monospace",
               fontSize: '1.25rem',
@@ -248,7 +254,7 @@ const CharacterSection = ({ character, index, isReversed }) => {
             }}
           >
             {character.role}
-          </motion.p>
+          </ScrollReveal>
 
           {/* 설명 */}
           <motion.p
@@ -387,22 +393,25 @@ const Characters = () => {
           textAlign: 'center',
         }}
       >
-        <motion.h2
-          initial={{ opacity: 0, y: 30 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: false, margin: '-100px' }}
-          transition={{ duration: 0.6 }}
+        <h2
           style={{
             fontSize: 'clamp(2.5rem, 6vw, 4rem)',
             fontWeight: 900,
             letterSpacing: '0.02em',
             marginBottom: '2rem',
+            display: 'flex',
+            justifyContent: 'center',
+            alignItems: 'center',
+            gap: '1rem',
+            color: '#fff'
           }}
         >
-          <span style={{ color: '#5eead4', margin: '0 0.5rem' }}>[</span>
-          CHARACTERS
-          <span style={{ color: '#5eead4', margin: '0 0.5rem' }}>]</span>
-        </motion.h2>
+          <span style={{ color: '#5eead4' }}>[</span>
+          <ScrollReveal as="span" baseRotation={5} enableBlur={true}>
+            CHARACTERS
+          </ScrollReveal>
+          <span style={{ color: '#5eead4' }}>]</span>
+        </h2>
       </div>
 
       {/* Character Sections */}

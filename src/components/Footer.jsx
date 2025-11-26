@@ -1,4 +1,5 @@
 import { motion } from 'framer-motion'
+import ScrollReveal from './ScrollReveal'
 
 const Footer = () => {
   const currentYear = new Date().getFullYear()
@@ -35,7 +36,9 @@ const Footer = () => {
             color: '#a78bfa',
           }}
         >
-          <span>© {currentYear} CHAINSAW MAN: REZE ARC</span>
+          <ScrollReveal as="span" baseRotation={2} enableBlur={true}>
+            {`© ${currentYear} CHAINSAW MAN: REZE ARC`}
+          </ScrollReveal>
           <div style={{ display: 'flex', gap: '2rem' }}>
             <motion.a
               href="https://github.com/irenevantar/Webprogramming"
@@ -44,14 +47,18 @@ const Footer = () => {
               whileHover={{ color: '#5eead4' }}
               style={{ transition: 'color 0.2s ease' }}
             >
-              GitHub
+              <ScrollReveal as="span" baseRotation={2} enableBlur={true}>
+                GitHub
+              </ScrollReveal>
             </motion.a>
             <motion.a
               href="#hero"
               whileHover={{ color: '#5eead4' }}
               style={{ transition: 'color 0.2s ease' }}
             >
-              Back to Top
+              <ScrollReveal as="span" baseRotation={2} enableBlur={true}>
+                Back to Top
+              </ScrollReveal>
             </motion.a>
           </div>
         </div>

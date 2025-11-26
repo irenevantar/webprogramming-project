@@ -9,5 +9,14 @@ export default defineConfig({
     host: true
   },
   base: '/webprogramming-project/',
-  publicDir: 'public'
+  publicDir: 'public',
+  build: {
+    rollupOptions: {
+      output: {
+        manualChunks: {
+          vendor: ['react', 'react-dom', 'framer-motion'],
+        },
+      },
+    },
+  }
 })

@@ -1,12 +1,14 @@
-import { useState, useEffect } from 'react'
+import { useState, useEffect, lazy, Suspense } from 'react'
 import { motion, AnimatePresence } from 'framer-motion'
 import Hero from './components/Hero'
-import Characters from './components/Characters'
-import Story from './components/Story'
-import Gallery from './components/Gallery'
-import Footer from './components/Footer'
 import Loader from './components/Loader'
 import SideNav from './components/SideNav'
+import Cursor from './components/Cursor'
+
+const Characters = lazy(() => import('./components/Characters'))
+const Story = lazy(() => import('./components/Story'))
+const Gallery = lazy(() => import('./components/Gallery'))
+const Footer = lazy(() => import('./components/Footer'))
 
 function App() {
   const [loading, setLoading] = useState(true)
@@ -28,21 +30,27 @@ function App() {
       </AnimatePresence>
 
       {!loading && (
-        <motion.div
-          initial={{ opacity: 0 }}
-          animate={{ opacity: 1 }}
-          transition={{ duration: 0.5 }}
-        >
+        <>
+          <Cursor />
           <SideNav isVisible={isScrolled} />
-          
-          <main>
-            <Hero onScroll={setIsScrolled} />
-            <Characters />
-            <Story />
-            <Gallery />
-          </main>
-          <Footer />
-        </motion.div>
+          <motion.div
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            transition={{ duration: 0.5 }}
+          >
+            <main>
+              <Hero onScroll={setIsScrolled} />
+              <Suspense fallback={<div style={{ height: '50vh' }}></div>}>
+                <Characters />
+                <Story />
+                <Gallery />
+              </Suspense>
+            </main>
+            <Suspense fallback={null}>
+              <Footer />
+            </Suspense>
+          </motion.div>
+        </>
       )}
     </>
   )
