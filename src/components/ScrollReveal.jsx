@@ -38,7 +38,7 @@ const ScrollReveal = ({
       scrollTrigger: {
         trigger: el,
         start: 'top 85%',
-        end: '+=300', // Fixed scroll distance for consistent speed
+        end: '+=150', // Faster animation (shorter scroll distance)
         scrub: 1,
       }
     })

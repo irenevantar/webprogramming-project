@@ -42,6 +42,9 @@ build/Release
 node_modules/
 jspm_packages/
 
+# VS Code debug profiles
+.vscode/edge-debug-profile/
+
 # TypeScript v1 declaration files
 typings/
 

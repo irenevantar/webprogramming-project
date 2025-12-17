@@ -5,10 +5,10 @@ const SideNav = ({ isVisible }) => {
   const [activeSection, setActiveSection] = useState('hero')
 
   const navItems = [
-    { id: 'hero', label: 'HOME' },
-    { id: 'characters', label: 'CHARACTERS' },
-    { id: 'story', label: 'STORY' },
-    { id: 'gallery', label: 'GALLERY' },
+    { id: 'hero', label: '홈' },
+    { id: 'characters', label: '등장인물' },
+    { id: 'story', label: '스토리' },
+    { id: 'gallery', label: '포스터' },
   ]
 
   useEffect(() => {
@@ -74,10 +74,10 @@ const SideNav = ({ isVisible }) => {
             style={{
               background: 'transparent',
               border: 'none',
-              color: isActive ? '#5eead4' : '#c4b5fd',
-              fontFamily: "'Space Mono', monospace",
+              color: isActive ? '#f97316' : '#c4b5fd',
+              fontFamily: "'Nanum Gothic', sans-serif",
               fontSize: '0.875rem',
-              fontWeight: isActive ? 700 : 400,
+              fontWeight: 700,
               letterSpacing: '0.1em',
               cursor: 'pointer',
               textAlign: 'left',
@@ -100,7 +100,7 @@ const SideNav = ({ isVisible }) => {
                 top: '50%',
                 transform: 'translateY(-50%)',
                 width: '4px',
-                background: 'linear-gradient(180deg, #5eead4, #2dd4bf)',
+                background: 'linear-gradient(180deg, #f97316, #ea580c)',
                 borderRadius: '2px',
               }}
             />

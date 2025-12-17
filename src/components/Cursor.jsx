@@ -1,35 +1,48 @@
-import { useEffect } from 'react'
-import { motion, useMotionValue, useSpring } from 'framer-motion'
+import { useEffect, useState, useRef } from 'react'
 import './Cursor.css'
 
 const Cursor = () => {
-  const cursorX = useMotionValue(-100)
-  const cursorY = useMotionValue(-100)
-
-  const springConfig = { damping: 20, stiffness: 500, mass: 0.5 }
-  const cursorXSpring = useSpring(cursorX, springConfig)
-  const cursorYSpring = useSpring(cursorY, springConfig)
+  const cursorRef = useRef(null)
+  const [isHovering, setIsHovering] = useState(false)
 
   useEffect(() => {
     const updateMousePosition = (e) => {
-      cursorX.set(e.clientX - 20)
-      cursorY.set(e.clientY - 20)
+      if (cursorRef.current) {
+        cursorRef.current.style.transform = `translate3d(${e.clientX}px, ${e.clientY}px, 0)`
+      }
+    }
+
+    const handleMouseOver = (e) => {
+      const target = e.target
+      const interactiveElement = target.closest('a, button, [onclick], .character-card, .poster-item')
+      if (interactiveElement || target.style.cursor === 'pointer') {
+        setIsHovering(true)
+      }
+    }
+
+    const handleMouseOut = (e) => {
+      const target = e.target
+      const interactiveElement = target.closest('a, button, [onclick], .character-card, .poster-item')
+      if (interactiveElement || target.style.cursor === 'pointer') {
+        setIsHovering(false)
+      }
     }
 
     window.addEventListener('mousemove', updateMousePosition)
+    window.addEventListener('mouseover', handleMouseOver)
+    window.addEventListener('mouseout', handleMouseOut)
 
     return () => {
       window.removeEventListener('mousemove', updateMousePosition)
+      window.removeEventListener('mouseover', handleMouseOver)
+      window.removeEventListener('mouseout', handleMouseOut)
     }
   }, [])
 
   return (
-    <motion.div
-      className="cursor-follower"
-      style={{
-        x: cursorXSpring,
-        y: cursorYSpring,
-      }}
+    <div
+      ref={cursorRef}
+      className={`cursor-follower ${isHovering ? 'cursor-hover' : ''}`}
     />
   )
 }

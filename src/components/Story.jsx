@@ -25,7 +25,8 @@ const Story = () => {
         <h2
           style={{
             fontSize: 'clamp(2.5rem, 6vw, 4rem)',
-            fontWeight: 900,
+            fontWeight: 700,
+            fontFamily: "'Nanum Gothic', sans-serif",
             letterSpacing: '0.02em',
             marginBottom: '4rem',
             textAlign: 'center',
@@ -36,11 +37,11 @@ const Story = () => {
             color: '#fff'
           }}
         >
-          <span style={{ color: '#5eead4' }}>[</span>
+          <span style={{ color: '#f97316' }}>[</span>
           <ScrollReveal as="span" baseRotation={5} enableBlur={true}>
-            SYNOPSIS
+            줄거리
           </ScrollReveal>
-          <span style={{ color: '#5eead4' }}>]</span>
+          <span style={{ color: '#f97316' }}>]</span>
         </h2>
 
         <div style={{ maxWidth: '1000px', margin: '0 auto' }}>

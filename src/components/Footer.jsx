@@ -44,7 +44,7 @@ const Footer = () => {
               href="https://github.com/irenevantar/Webprogramming"
               target="_blank"
               rel="noopener noreferrer"
-              whileHover={{ color: '#5eead4' }}
+              whileHover={{ color: '#f97316' }}
               style={{ transition: 'color 0.2s ease' }}
             >
               <ScrollReveal as="span" baseRotation={2} enableBlur={true}>

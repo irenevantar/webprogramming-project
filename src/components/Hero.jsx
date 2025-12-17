@@ -58,8 +58,9 @@ const Hero = ({ onScroll }) => {
             pointerEvents: 'none',
           }}
         />
-        {/* 투명 오버레이로 YouTube UI 차단 */}
+        {/* 투명 오버레이로 YouTube UI 차단 및 클릭 시 링크 이동 */}
         <div
+          onClick={() => window.open('https://www.youtube.com/watch?v=mWacdcatC9o', '_blank')}
           style={{
             position: 'absolute',
             top: 0,
@@ -69,7 +70,9 @@ const Hero = ({ onScroll }) => {
             background: 'transparent',
             pointerEvents: 'auto',
             zIndex: 1,
+            cursor: 'pointer',
           }}
+          title="Click to watch trailer on YouTube"
         />
       </div>
 
@@ -98,10 +101,10 @@ const Hero = ({ onScroll }) => {
             fontSize: '0.75rem',
             fontWeight: 800,
             letterSpacing: '0.2em',
-            color: '#a78bfa',
+            color: '#f97316',
           }}
         >
-          SCROLL
+          스크롤
         </motion.span>
         <motion.svg
           width="24"
@@ -109,7 +112,7 @@ const Hero = ({ onScroll }) => {
           viewBox="0 0 24 24"
           animate={{ y: [0, 10, 0] }}
           transition={{ duration: 2, repeat: Infinity, delay: 0.2 }}
-          style={{ color: '#5eead4' }}
+          style={{ color: '#f97316' }}
         >
           <path
             d="M12 4L12 20M12 20L6 14M12 20L18 14"

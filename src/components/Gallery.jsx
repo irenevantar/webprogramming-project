@@ -2,88 +2,105 @@ import { motion, AnimatePresence } from 'framer-motion'
 import { useInView } from 'framer-motion'
 import { useRef, useState } from 'react'
 import ScrollReveal from './ScrollReveal'
-import rezePosterImg from '/assets/images/reze-poster.jpg'
-import rezePoster2Img from '/assets/images/reze-poster-2.jpg'
-import rezePoster3Img from '/assets/images/reze-poster-3.png'
 
-const GalleryItem = ({ index, image, onClick }) => {
+const POSTERS = [
+  { id: 'main1', title: '메인 포스터 1', src: '/assets/images/posters/mainposter1.png' },
+  { id: 'main2', title: '메인 포스터 2', src: '/assets/images/posters/mainposter2.png' },
+  { id: 'main3', title: '메인 포스터 3', src: '/assets/images/posters/mainposter3.png' },
+  { id: 'main4', title: '메인 포스터 4', src: '/assets/images/posters/mainposter4.png' },
+  { id: 'special', title: '스페셜 포스터', src: '/assets/images/posters/specialposter.png' },
+  { id: 'cafe', title: '카페 포스터', src: '/assets/images/posters/cafeposter.png' },
+  { id: 'chainsaw', title: '체인소 맨 포스터', src: '/assets/images/posters/chainsawmanposter.png' },
+  { id: 'denji', title: '덴지 포스터', src: '/assets/images/posters/denjiposter.png' },
+  { id: 'reze', title: '레제 포스터', src: '/assets/images/posters/rezeposter.png' },
+  { id: 'makima', title: '마키마 포스터', src: '/assets/images/posters/makimaposter.png' },
+  { id: 'power', title: '파워 포스터', src: '/assets/images/posters/powerposter.png' },
+  { id: 'aki', title: '아키 포스터', src: '/assets/images/posters/akiposter.png' },
+  { id: 'pochita', title: '포치타 포스터', src: '/assets/images/posters/pochitaposter.png' },
+  { id: 'bomb', title: '폭탄의 악마 포스터', src: '/assets/images/posters/bombdevil.png' },
+  { id: 'beam', title: '빔 포스터', src: '/assets/images/posters/beamposter.png' },
+  { id: 'angel', title: '천사의 악마 포스터', src: '/assets/images/posters/angledevilposter.png' },
+]
+
+const GalleryItem = ({ index, poster, onClick }) => {
   const ref = useRef(null)
-  const isInView = useInView(ref, { once: true, margin: '-100px' })
+  const isInView = useInView(ref, { once: true, margin: '-50px' })
 
   return (
     <motion.div
       ref={ref}
-      initial={{ opacity: 0, scale: 0.9 }}
-      animate={isInView ? { opacity: 1, scale: 1 } : { opacity: 0, scale: 0.9 }}
-      transition={{ duration: 0.5, delay: index * 0.1 }}
-      whileHover={{ scale: 1.05 }}
-      onClick={image ? onClick : undefined}
+      initial={{ opacity: 0, y: 20 }}
+      animate={isInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 20 }}
+      transition={{ duration: 0.5, delay: index * 0.05 }}
+      whileHover={{ scale: 1.03, y: -5 }}
+      onClick={onClick}
+      className="poster-item"
       style={{
         position: 'relative',
         aspectRatio: '2 / 3',
         borderRadius: '12px',
         overflow: 'hidden',
         background: '#0a0a0a',
-        border: '1px solid rgba(196, 181, 253, 0.1)',
-        cursor: image ? 'pointer' : 'default',
+        border: '1px solid rgba(249, 115, 22, 0.1)',
+        cursor: 'pointer',
       }}
     >
-      {image ? (
-        <img
-          src={image}
-          alt={`Gallery image ${index + 1}`}
-          style={{
-            width: '100%',
-            height: '100%',
-            objectFit: 'cover',
-          }}
-        />
-      ) : (
-        <div
-          style={{
-            display: 'flex',
-            flexDirection: 'column',
-            alignItems: 'center',
-            justifyContent: 'center',
-            height: '100%',
-            color: '#6b7280',
-          }}
-        >
-          <svg width="80" height="80" viewBox="0 0 80 80" fill="none">
-            <rect x="10" y="10" width="60" height="60" stroke="currentColor" strokeWidth="2" />
-            <circle cx="30" cy="30" r="8" stroke="currentColor" strokeWidth="2" />
-            <path d="M10 60 L30 40 L50 55 L70 35 L70 70 L10 70 Z" fill="currentColor" opacity="0.3" />
-          </svg>
-          <ScrollReveal
-            as="p"
-            baseRotation={2}
-            enableBlur={true}
-            style={{
-              fontSize: '0.875rem',
-              fontWeight: 700,
-              textTransform: 'uppercase',
-              letterSpacing: '0.1em',
-              marginTop: '1rem',
-            }}
-          >
-            이미지를 추가하세요
-          </ScrollReveal>
-        </div>
-      )}
+      <img
+        src={poster.src}
+        alt={poster.title}
+        loading="lazy"
+        style={{
+          width: '100%',
+          height: '100%',
+          objectFit: 'cover',
+          transition: 'transform 0.3s ease',
+        }}
+      />
+      <div style={{
+        position: 'absolute',
+        bottom: 0,
+        left: 0,
+        width: '100%',
+        padding: '1rem',
+        background: 'linear-gradient(to top, rgba(0,0,0,0.8), transparent)',
+        opacity: 0,
+        transition: 'opacity 0.3s ease',
+      }}
+      className="poster-overlay"
+      >
+        <p style={{
+          color: '#fff',
+          fontFamily: "'Nanum Gothic', sans-serif",
+          fontWeight: 700,
+          fontSize: '0.875rem',
+          textAlign: 'center',
+        }}>
+          {poster.title}
+        </p>
+      </div>
+      <style>{`
+        div:hover .poster-overlay { opacity: 1 !important; }
+      `}</style>
     </motion.div>
   )
 }
 
 const Gallery = () => {
-  const ref = useRef(null)
-  const isInView = useInView(ref, { once: true, margin: '-100px' })
-  const [selectedImage, setSelectedImage] = useState(null)
+  const [selectedPoster, setSelectedPoster] = useState(null)
 
-  const images = [
-    rezePosterImg,
-    rezePoster2Img,
-    rezePoster3Img,
-  ]
+  const handleNext = (e) => {
+    e.stopPropagation()
+    const currentIndex = POSTERS.findIndex(p => p.id === selectedPoster.id)
+    const nextIndex = (currentIndex + 1) % POSTERS.length
+    setSelectedPoster(POSTERS[nextIndex])
+  }
+
+  const handlePrev = (e) => {
+    e.stopPropagation()
+    const currentIndex = POSTERS.findIndex(p => p.id === selectedPoster.id)
+    const prevIndex = (currentIndex - 1 + POSTERS.length) % POSTERS.length
+    setSelectedPoster(POSTERS[prevIndex])
+  }
 
   return (
     <>
@@ -104,7 +121,8 @@ const Gallery = () => {
         <h2
           style={{
             fontSize: 'clamp(2.5rem, 6vw, 4rem)',
-            fontWeight: 900,
+            fontWeight: 700,
+            fontFamily: "'Nanum Gothic', sans-serif",
             letterSpacing: '0.02em',
             marginBottom: '4rem',
             textAlign: 'center',
@@ -115,41 +133,41 @@ const Gallery = () => {
             color: '#fff'
           }}
         >
-          <span style={{ color: '#5eead4' }}>[</span>
+          <span style={{ color: '#f97316' }}>[</span>
           <ScrollReveal as="span" baseRotation={5} enableBlur={true}>
-            GALLERY
+            포스터
           </ScrollReveal>
-          <span style={{ color: '#5eead4' }}>]</span>
+          <span style={{ color: '#f97316' }}>]</span>
         </h2>
 
         <div
           style={{
             display: 'grid',
-            gridTemplateColumns: 'repeat(auto-fit, minmax(280px, 1fr))',
+            gridTemplateColumns: 'repeat(auto-fill, minmax(250px, 1fr))',
             gap: '2rem',
             marginTop: '2rem',
           }}
         >
-          {images.map((image, index) => (
+          {POSTERS.map((poster, index) => (
             <GalleryItem 
-              key={index} 
+              key={poster.id} 
               index={index} 
-              image={image} 
-              onClick={() => image && setSelectedImage(image)}
+              poster={poster} 
+              onClick={() => setSelectedPoster(poster)}
             />
           ))}
         </div>
       </div>
     </section>
 
-    {/* 이미지 확대 모달 */}
+    {/* Lightbox Modal */}
     <AnimatePresence>
-      {selectedImage && (
+      {selectedPoster && (
         <motion.div
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
           exit={{ opacity: 0 }}
-          onClick={() => setSelectedImage(null)}
+          onClick={() => setSelectedPoster(null)}
           style={{
             position: 'fixed',
             top: 0,
@@ -162,54 +180,110 @@ const Gallery = () => {
             justifyContent: 'center',
             zIndex: 10000,
             cursor: 'pointer',
-            padding: '2rem',
           }}
         >
-          <motion.img
-            initial={{ scale: 0.8, opacity: 0 }}
+          {/* Navigation Buttons */}
+          <button
+            onClick={handlePrev}
+            style={{
+              position: 'absolute',
+              left: '20px',
+              top: '50%',
+              transform: 'translateY(-50%)',
+              background: 'transparent',
+              border: 'none',
+              color: '#f97316',
+              width: '60px',
+              height: '60px',
+              cursor: 'pointer',
+              zIndex: 10001,
+              fontSize: '3rem',
+              fontWeight: 'bold',
+              display: 'flex',
+              alignItems: 'center',
+              justifyContent: 'center',
+            }}
+          >
+            &lt;
+          </button>
+          <button
+            onClick={handleNext}
+            style={{
+              position: 'absolute',
+              right: '20px',
+              top: '50%',
+              transform: 'translateY(-50%)',
+              background: 'transparent',
+              border: 'none',
+              color: '#f97316',
+              width: '60px',
+              height: '60px',
+              cursor: 'pointer',
+              zIndex: 10001,
+              fontSize: '3rem',
+              fontWeight: 'bold',
+              display: 'flex',
+              alignItems: 'center',
+              justifyContent: 'center',
+            }}
+          >
+            &gt;
+          </button>
+
+          <motion.div
+            initial={{ scale: 0.9, opacity: 0 }}
             animate={{ scale: 1, opacity: 1 }}
-            exit={{ scale: 0.8, opacity: 0 }}
+            exit={{ scale: 0.9, opacity: 0 }}
             transition={{ type: 'spring', duration: 0.5 }}
-            src={selectedImage}
-            alt="확대된 포스터"
             onClick={(e) => e.stopPropagation()}
             style={{
+              position: 'relative',
               maxWidth: '90%',
               maxHeight: '90vh',
-              objectFit: 'contain',
-              borderRadius: '12px',
-              boxShadow: '0 0 100px rgba(94, 234, 212, 0.3)',
-              cursor: 'default',
+              display: 'flex',
+              flexDirection: 'column',
+              alignItems: 'center',
             }}
-          />
+          >
+            <img
+              src={selectedPoster.src}
+              alt={selectedPoster.title}
+              style={{
+                maxWidth: '100%',
+                maxHeight: '85vh',
+                objectFit: 'contain',
+                borderRadius: '8px',
+                boxShadow: '0 0 50px rgba(249, 115, 22, 0.2)',
+              }}
+            />
+            <p style={{
+              color: '#fff',
+              marginTop: '1rem',
+              fontFamily: "'Nanum Gothic', sans-serif",
+              fontSize: '1.25rem',
+              fontWeight: 700,
+            }}>
+              {selectedPoster.title}
+            </p>
+          </motion.div>
           
-          {/* 닫기 버튼 */}
-          <motion.button
-            initial={{ opacity: 0 }}
-            animate={{ opacity: 1 }}
-            exit={{ opacity: 0 }}
-            whileHover={{ scale: 1.1, rotate: 90 }}
-            onClick={() => setSelectedImage(null)}
+          {/* Close Button */}
+          <button
+            onClick={() => setSelectedPoster(null)}
             style={{
               position: 'absolute',
               top: '2rem',
               right: '2rem',
-              width: '50px',
-              height: '50px',
-              borderRadius: '50%',
-              background: 'rgba(196, 181, 253, 0.2)',
-              border: '2px solid #c4b5fd',
-              color: '#c4b5fd',
-              fontSize: '1.5rem',
+              background: 'transparent',
+              border: 'none',
+              color: '#fff',
+              fontSize: '2rem',
               cursor: 'pointer',
-              display: 'flex',
-              alignItems: 'center',
-              justifyContent: 'center',
-              backdropFilter: 'blur(10px)',
+              zIndex: 10001,
             }}
           >
             ✕
-          </motion.button>
+          </button>
         </motion.div>
       )}
     </AnimatePresence>
