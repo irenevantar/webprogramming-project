@@ -5,6 +5,7 @@ const DOCK_ITEMS = [
   { id: 'hero', label: '홈' },
   { id: 'characters', label: '등장인물' },
   { id: 'story', label: '시놉시스' },
+  { id: 'ost', label: 'OST' },
   { id: 'trailers', label: '예고편' },
   { id: 'gallery', label: '포스터' },
   { id: 'staff', label: '제작진' },
@@ -69,18 +70,20 @@ const Dock = () => {
         bottom: '20px',
         left: '50%',
         transform: 'translateX(-50%)',
-        height: '80px',
+        height: '60px', // Reduced default height
         padding: '0 20px',
         gap: '20px',
         display: 'flex',
-        alignItems: 'end',
+        alignItems: 'center', // Vertically center items
         background: 'rgba(0, 0, 0, 0.5)',
         backdropFilter: 'blur(10px)',
         borderRadius: '20px',
         border: '1px solid rgba(255, 255, 255, 0.1)',
         zIndex: 1000,
         boxShadow: '0 10px 30px rgba(0,0,0,0.5)',
+        transition: 'height 0.3s ease', // Smooth height transition
       }}
+      whileHover={{ height: '80px' }} // Expand on hover
     >
       {DOCK_ITEMS.map((item) => (
         <DockItem key={item.id} mouseX={mouseX} item={item} />

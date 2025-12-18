@@ -8,6 +8,7 @@ import BackgroundEffect from './components/BackgroundEffect'
 
 const Characters = lazy(() => import('./components/Characters'))
 const Story = lazy(() => import('./components/Story'))
+const OST = lazy(() => import('./components/OST'))
 const Gallery = lazy(() => import('./components/Gallery'))
 const Trailers = lazy(() => import('./components/Trailers'))
 const Staff = lazy(() => import('./components/Staff'))
@@ -47,6 +48,7 @@ function App() {
               <Suspense fallback={<div style={{ height: '50vh' }}></div>}>
                 <Characters />
                 <Story />
+                <OST />
                 <Gallery />
                 <Trailers />
                 <Staff />

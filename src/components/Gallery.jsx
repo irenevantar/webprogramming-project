@@ -135,11 +135,9 @@ const Gallery = () => {
             color: '#fff'
           }}
         >
-          <span style={{ color: '#f97316' }}>[</span>
-          <ScrollReveal as="span" baseRotation={5} enableBlur={true}>
-            포스터
-          </ScrollReveal>
-          <span style={{ color: '#f97316' }}>]</span>
+          <ScrollReveal as="span" style={{ color: '#f97316' }}>[</ScrollReveal>
+          <ScrollReveal as="span">포스터</ScrollReveal>
+          <ScrollReveal as="span" style={{ color: '#f97316' }}>]</ScrollReveal>
         </h2>
 
         <div
