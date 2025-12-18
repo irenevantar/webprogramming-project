@@ -62,7 +62,7 @@ const CHARACTERS = [
     name: '천사의 악마',
     role: '천사의 악마',
     description: '천사의 공포를 구현한 악마. 닿기만 해도 수명을 흡수할 수 있으며, 훔친 시간으로 강력한 무기를 만든다. 강력한 힘에도 불구하고 게으르고 일하기 싫어한다.',
-    images: [withBase('assets/images/new_characters/angle devil.png')]
+    images: [withBase('assets/images/new_characters/angle_devil.png')]
   },
   {
     id: 'pochita',
