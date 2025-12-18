@@ -164,3 +164,11 @@ ul, ol {
     --section-padding: 4rem;
   }
 }
+
+.text-gradient {
+  background: linear-gradient(to right, #ff9900, #800080);
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+  -webkit-text-fill-color: transparent;
+}

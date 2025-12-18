@@ -1,5 +1,4 @@
-import { useState, useRef, useEffect } from 'react'
-import { motion } from 'framer-motion'
+import { useState, useEffect, useRef } from 'react'
 import ScrollReveal from './ScrollReveal'
 
 const withBase = (path) => `${import.meta.env.BASE_URL}${path}`
@@ -7,49 +6,23 @@ const withBase = (path) => `${import.meta.env.BASE_URL}${path}`
 const OST_DATA = [
   {
     id: 'opening',
+    type: 'Opening',
     title: 'IRIS OUT',
-    // Using a sample audio file for demonstration since we don't have the actual files
-    audioSrc: 'https://www.soundhelix.com/examples/mp3/SoundHelix-Song-1.mp3', 
-    color: '#f97316'
+    videoId: 'Cb0JZhdmjtg',
+    color: '#f97316',
+    cover: withBase('assets/images/posters/mainposter1.png')
   },
   {
     id: 'ending',
+    type: 'Ending',
     title: 'JANE DOE',
-    audioSrc: 'https://www.soundhelix.com/examples/mp3/SoundHelix-Song-2.mp3',
-    color: '#f97316'
+    videoId: 'zuO2fClon98',
+    color: '#a78bfa',
+    cover: withBase('assets/images/posters/mainposter2.png')
   }
 ]
 
-const LPPlayer = ({ data }) => {
-  const [isPlaying, setIsPlaying] = useState(false)
-  const [progress, setProgress] = useState(0)
-  const audioRef = useRef(null)
-
-  const togglePlay = () => {
-    if (audioRef.current) {
-      if (isPlaying) {
-        audioRef.current.pause()
-      } else {
-        audioRef.current.play()
-      }
-      setIsPlaying(!isPlaying)
-    }
-  }
-
-  const handleTimeUpdate = () => {
-    if (audioRef.current) {
-      const current = audioRef.current.currentTime
-      const duration = audioRef.current.duration
-      setProgress((current / duration) * 100)
-    }
-  }
-
-  const handleSeek = (e) => {
-    const seekTime = (audioRef.current.duration / 100) * e.target.value
-    audioRef.current.currentTime = seekTime
-    setProgress(e.target.value)
-  }
-
+const LPPlayer = ({ data, isPlaying, onToggle }) => {
   return (
     <div style={{
       display: 'flex',
@@ -57,16 +30,24 @@ const LPPlayer = ({ data }) => {
       alignItems: 'center',
       gap: '2rem',
     }}>
-      <audio
-        ref={audioRef}
-        src={data.audioSrc}
-        onTimeUpdate={handleTimeUpdate}
-        onEnded={() => setIsPlaying(false)}
-      />
+      {/* Label */}
+      <div style={{
+        background: data.color,
+        color: '#000',
+        padding: '0.25rem 0.75rem',
+        borderRadius: '999px',
+        fontSize: '0.875rem',
+        fontWeight: 700,
+        marginBottom: '-1rem',
+        zIndex: 10,
+        boxShadow: `0 0 10px ${data.color}80`,
+      }}>
+        {data.type}
+      </div>
 
       {/* LP Record */}
       <div 
-        onClick={togglePlay}
+        onClick={onToggle}
         style={{
           position: 'relative',
           width: '300px',
@@ -82,17 +63,17 @@ const LPPlayer = ({ data }) => {
             borderRadius: '50%',
             background: 'radial-gradient(circle at center, #1a1a1a 0%, #000 100%)',
             border: '1px solid rgba(255,255,255,0.1)',
-            boxShadow: '0 10px 30px rgba(0,0,0,0.5)',
+            boxShadow: isPlaying ? `0 0 30px ${data.color}40` : '0 10px 30px rgba(0,0,0,0.5)',
             position: 'relative',
             display: 'flex',
             alignItems: 'center',
             justifyContent: 'center',
             animation: 'spin 4s linear infinite',
             animationPlayState: isPlaying ? 'running' : 'paused',
-            transition: 'transform 0.5s ease',
+            transition: 'all 0.5s ease',
           }}
         >
-          {/* Cover Image (Placeholder) */}
+          {/* Cover Image */}
           <div style={{
             position: 'absolute',
             top: 0,
@@ -104,42 +85,26 @@ const LPPlayer = ({ data }) => {
             opacity: 0.6,
           }}>
              <img 
-               src={withBase('assets/images/posters/mainposter1.png')} 
+               src={data.cover} 
                alt="Cover" 
                style={{ width: '100%', height: '100%', objectFit: 'cover' }}
              />
           </div>
 
           {/* Grooves */}
-          <div style={{
-            position: 'absolute',
-            top: '5%',
-            left: '5%',
-            right: '5%',
-            bottom: '5%',
-            borderRadius: '50%',
-            border: '2px solid rgba(255,255,255,0.05)',
-          }} />
-          <div style={{
-            position: 'absolute',
-            top: '15%',
-            left: '15%',
-            right: '15%',
-            bottom: '15%',
-            borderRadius: '50%',
-            border: '2px solid rgba(255,255,255,0.05)',
-          }} />
-          <div style={{
-            position: 'absolute',
-            top: '25%',
-            left: '25%',
-            right: '25%',
-            bottom: '25%',
-            borderRadius: '50%',
-            border: '2px solid rgba(255,255,255,0.05)',
-          }} />
+          {[1, 2, 3].map(i => (
+            <div key={i} style={{
+              position: 'absolute',
+              top: `${5 + i * 10}%`,
+              left: `${5 + i * 10}%`,
+              right: `${5 + i * 10}%`,
+              bottom: `${5 + i * 10}%`,
+              borderRadius: '50%',
+              border: '2px solid rgba(255,255,255,0.05)',
+            }} />
+          ))}
 
-          {/* Label */}
+          {/* Center Label */}
           <div style={{
             width: '100px',
             height: '100px',
@@ -148,7 +113,7 @@ const LPPlayer = ({ data }) => {
             display: 'flex',
             alignItems: 'center',
             justifyContent: 'center',
-            boxShadow: '0 0 20px rgba(249, 115, 22, 0.3)',
+            boxShadow: `0 0 20px ${data.color}60`,
             zIndex: 2,
           }}>
             <div style={{
@@ -175,50 +140,104 @@ const LPPlayer = ({ data }) => {
           fontWeight: 700,
           fontFamily: "'Nanum Gothic', sans-serif",
           letterSpacing: '0.1em',
-          textShadow: isPlaying ? '0 0 10px rgba(249, 115, 22, 0.5)' : 'none',
+          textShadow: isPlaying ? `0 0 10px ${data.color}80` : 'none',
         }}>
           {data.title}
         </h3>
 
-        <div style={{ display: 'flex', alignItems: 'center', gap: '1rem', width: '100%' }}>
-          <button
-            onClick={togglePlay}
-            style={{
-              background: 'transparent',
-              border: 'none',
-              color: '#f97316',
-              fontSize: '1.5rem',
-              cursor: 'pointer',
-            }}
-          >
-            {isPlaying ? '❚❚' : '▶'}
-          </button>
-          
-          <input
-            type="range"
-            min="0"
-            max="100"
-            value={progress}
-            onChange={handleSeek}
-            style={{
-              width: '100%',
-              accentColor: '#f97316',
-              cursor: 'pointer',
-            }}
-          />
-        </div>
+        <button
+          onClick={onToggle}
+          style={{
+            background: 'transparent',
+            border: '2px solid ' + data.color,
+            borderRadius: '50%',
+            width: '50px',
+            height: '50px',
+            display: 'flex',
+            alignItems: 'center',
+            justifyContent: 'center',
+            color: data.color,
+            fontSize: '1.2rem',
+            cursor: 'pointer',
+            transition: 'all 0.3s ease',
+            background: isPlaying ? data.color : 'transparent',
+            color: isPlaying ? '#000' : data.color,
+          }}
+        >
+          {isPlaying ? '❚❚' : '▶'}
+        </button>
       </div>
-      <style>{`
-        @keyframes spin {
-          from { transform: rotate(0deg); }
-          to { transform: rotate(360deg); }
-        }
-      `}</style>
     </div>
   )
 }
 
 const OST = () => {
+  const [playingId, setPlayingId] = useState(null)
+  const playersRef = useRef({})
+
+  useEffect(() => {
+    // Load YouTube IFrame API
+    if (!window.YT) {
+      const tag = document.createElement('script')
+      tag.src = "https://www.youtube.com/iframe_api"
+      const firstScriptTag = document.getElementsByTagName('script')[0]
+      firstScriptTag.parentNode.insertBefore(tag, firstScriptTag)
+    }
+
+    const initPlayers = () => {
+      OST_DATA.forEach(track => {
+        if (!playersRef.current[track.id]) {
+          playersRef.current[track.id] = new window.YT.Player(`player-${track.id}`, {
+            height: '0',
+            width: '0',
+            videoId: track.videoId,
+            playerVars: {
+              'playsinline': 1,
+              'controls': 0,
+              'disablekb': 1
+            },
+            events: {
+              'onStateChange': (event) => onPlayerStateChange(event, track.id)
+            }
+          })
+        }
+      })
+    }
+
+    if (window.YT && window.YT.Player) {
+      initPlayers()
+    } else {
+      window.onYouTubeIframeAPIReady = initPlayers
+    }
+
+    return () => {
+      // Cleanup if needed
+    }
+  }, [])
+
+  const onPlayerStateChange = (event, id) => {
+    if (event.data === window.YT.PlayerState.ENDED) {
+      setPlayingId(null)
+    }
+  }
+
+  const togglePlay = (id) => {
+    const player = playersRef.current[id]
+    if (!player || typeof player.playVideo !== 'function') return
+
+    if (playingId === id) {
+      player.pauseVideo()
+      setPlayingId(null)
+    } else {
+      // Stop currently playing
+      if (playingId && playersRef.current[playingId]) {
+        playersRef.current[playingId].pauseVideo()
+      }
+      player.playVideo()
+      setPlayingId(id)
+    }
+  }
+
   return (
     <section
       id="ost"
@@ -229,6 +248,15 @@ const OST = () => {
         overflow: 'hidden',
       }}
     >
+      {/* Hidden Players */}
+      {OST_DATA.map(track => (
+        <div 
+          key={track.id} 
+          id={`player-${track.id}`} 
+          style={{ position: 'absolute', width: 0, height: 0, opacity: 0, pointerEvents: 'none' }} 
+        />
+      ))}
+
       <div style={{ maxWidth: '1200px', margin: '0 auto', padding: '0 2rem' }}>
         <div style={{ marginBottom: '6rem', textAlign: 'center' }}>
           <h2 style={{
@@ -241,9 +269,9 @@ const OST = () => {
             justifyContent: 'center',
             gap: '1rem'
           }}>
-            <ScrollReveal as="span" style={{ color: '#f97316' }}>[</ScrollReveal>
-            <ScrollReveal as="span">OST</ScrollReveal>
-            <ScrollReveal as="span" style={{ color: '#f97316' }}>]</ScrollReveal>
+            <ScrollReveal as="span" className="text-gradient">[</ScrollReveal>
+            <ScrollReveal as="span" className="text-gradient">OST</ScrollReveal>
+            <ScrollReveal as="span" className="text-gradient">]</ScrollReveal>
           </h2>
         </div>
 
@@ -255,11 +283,21 @@ const OST = () => {
         }}>
           {OST_DATA.map((ost, index) => (
             <ScrollReveal key={ost.id} delay={index * 0.2}>
-              <LPPlayer data={ost} />
+              <LPPlayer 
+                data={ost} 
+                isPlaying={playingId === ost.id}
+                onToggle={() => togglePlay(ost.id)}
+              />
             </ScrollReveal>
           ))}
         </div>
       </div>
+      <style>{`
+        @keyframes spin {
+          from { transform: rotate(0deg); }
+          to { transform: rotate(360deg); }
+        }
+      `}</style>
     </section>
   )
 }

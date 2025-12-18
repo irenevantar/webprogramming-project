@@ -6,8 +6,8 @@ const DOCK_ITEMS = [
   { id: 'characters', label: '등장인물' },
   { id: 'story', label: '시놉시스' },
   { id: 'ost', label: 'OST' },
-  { id: 'trailers', label: '예고편' },
   { id: 'gallery', label: '포스터' },
+  { id: 'trailers', label: '예고편' },
   { id: 'staff', label: '제작진' },
 ]
 

@@ -51,7 +51,7 @@ const CHARACTERS = [
   {
     id: 'power',
     name: '파워',
-    cv: '파일즈 아이',
+    cv: '파이루즈 아이',
     role: '피의 마인',
     description: '시체를 차지한 피의 마인. 유치하고 탐욕스러우며 고양이를 좋아하지만, 덴지의 가까운 동료가 된다. 종종 거짓말을 하고 위험에서 도망치지만, 숨겨진 의리가 있다.',
     images: [withBase('assets/images/new_characters/power.png')]
@@ -164,9 +164,9 @@ const Characters = () => {
           justifyContent: 'center',
           gap: '1rem'
         }}>
-          <ScrollReveal as="span" style={{ color: '#f97316' }}>[</ScrollReveal>
-          <ScrollReveal as="span">등장인물</ScrollReveal>
-          <ScrollReveal as="span" style={{ color: '#f97316' }}>]</ScrollReveal>
+          <ScrollReveal as="span" className="text-gradient">[</ScrollReveal>
+          <ScrollReveal as="span" className="text-gradient">등장인물</ScrollReveal>
+          <ScrollReveal as="span" className="text-gradient">]</ScrollReveal>
         </h2>
       </div>
 
@@ -228,11 +228,11 @@ const Characters = () => {
                     width: '100%',
                     height: '100%',
                     objectFit: 'contain',
-                    objectPosition: 'center bottom',
+                    objectPosition: ['reze', 'aki'].includes(char.id) ? 'center bottom' : 'center 20%',
                     filter: 'drop-shadow(0 0 20px rgba(249, 115, 22, 0.2))',
                     transform: char.id === 'pochita' 
                       ? 'scale(0.5)' 
-                      : (['reze', 'aki'].includes(char.id) ? 'scale(0.7)' : 'scale(1.2)'),
+                      : (['reze', 'aki'].includes(char.id) ? 'scale(0.8)' : 'scale(1.2)'),
                   }}
                 />
               </div>
@@ -377,7 +377,7 @@ const Characters = () => {
                       filter: 'drop-shadow(0 0 40px rgba(249, 115, 22, 0.4))',
                       transform: selectedChar.id === 'pochita' 
                         ? 'scale(0.4)' 
-                        : (['reze', 'aki'].includes(selectedChar.id) ? 'scale(0.45)' : 'scale(1.44)'),
+                        : (['reze', 'aki'].includes(selectedChar.id) ? 'scale(0.4)' : 'scale(1.7)'),
                       objectPosition: selectedChar.id === 'pochita' ? 'center center' : 'center center',
                     }}
                   />
@@ -429,7 +429,6 @@ const Characters = () => {
                       background: '#000',
                       border: '2px solid #f97316',
                       borderRadius: '8px',
-                      color: '#f97316',
                       fontWeight: 'bold',
                       fontSize: '1rem',
                       cursor: 'pointer',
@@ -437,7 +436,7 @@ const Characters = () => {
                       boxShadow: '0 4px 15px rgba(249, 115, 22, 0.2)',
                     }}
                   >
-                    악마화
+                    <span className="text-gradient">악마화</span>
                   </button>
                 )}
               </div>
