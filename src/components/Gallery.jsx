@@ -3,23 +3,25 @@ import { useInView } from 'framer-motion'
 import { useRef, useState } from 'react'
 import ScrollReveal from './ScrollReveal'
 
+const withBase = (path) => `${import.meta.env.BASE_URL}${path}`
+
 const POSTERS = [
-  { id: 'main1', title: '메인 포스터 1', src: '/assets/images/posters/mainposter1.png' },
-  { id: 'main2', title: '메인 포스터 2', src: '/assets/images/posters/mainposter2.png' },
-  { id: 'main3', title: '메인 포스터 3', src: '/assets/images/posters/mainposter3.png' },
-  { id: 'main4', title: '메인 포스터 4', src: '/assets/images/posters/mainposter4.png' },
-  { id: 'special', title: '스페셜 포스터', src: '/assets/images/posters/specialposter.png' },
-  { id: 'cafe', title: '카페 포스터', src: '/assets/images/posters/cafeposter.png' },
-  { id: 'chainsaw', title: '체인소 맨 포스터', src: '/assets/images/posters/chainsawmanposter.png' },
-  { id: 'denji', title: '덴지 포스터', src: '/assets/images/posters/denjiposter.png' },
-  { id: 'reze', title: '레제 포스터', src: '/assets/images/posters/rezeposter.png' },
-  { id: 'makima', title: '마키마 포스터', src: '/assets/images/posters/makimaposter.png' },
-  { id: 'power', title: '파워 포스터', src: '/assets/images/posters/powerposter.png' },
-  { id: 'aki', title: '아키 포스터', src: '/assets/images/posters/akiposter.png' },
-  { id: 'pochita', title: '포치타 포스터', src: '/assets/images/posters/pochitaposter.png' },
-  { id: 'bomb', title: '폭탄의 악마 포스터', src: '/assets/images/posters/bombdevil.png' },
-  { id: 'beam', title: '빔 포스터', src: '/assets/images/posters/beamposter.png' },
-  { id: 'angel', title: '천사의 악마 포스터', src: '/assets/images/posters/angledevilposter.png' },
+  { id: 'main1', title: '메인 포스터 1', src: withBase('assets/images/posters/mainposter1.png') },
+  { id: 'main2', title: '메인 포스터 2', src: withBase('assets/images/posters/mainposter2.png') },
+  { id: 'main3', title: '메인 포스터 3', src: withBase('assets/images/posters/mainposter3.png') },
+  { id: 'main4', title: '메인 포스터 4', src: withBase('assets/images/posters/mainposter4.png') },
+  { id: 'special', title: '스페셜 포스터', src: withBase('assets/images/posters/specialposter.png') },
+  { id: 'cafe', title: '카페 포스터', src: withBase('assets/images/posters/cafeposter.png') },
+  { id: 'chainsaw', title: '체인소 맨 포스터', src: withBase('assets/images/posters/chainsawmanposter.png') },
+  { id: 'denji', title: '덴지 포스터', src: withBase('assets/images/posters/denjiposter.png') },
+  { id: 'reze', title: '레제 포스터', src: withBase('assets/images/posters/rezeposter.png') },
+  { id: 'makima', title: '마키마 포스터', src: withBase('assets/images/posters/makimaposter.png') },
+  { id: 'power', title: '파워 포스터', src: withBase('assets/images/posters/powerposter.png') },
+  { id: 'aki', title: '아키 포스터', src: withBase('assets/images/posters/akiposter.png') },
+  { id: 'pochita', title: '포치타 포스터', src: withBase('assets/images/posters/pochitaposter.png') },
+  { id: 'bomb', title: '폭탄의 악마 포스터', src: withBase('assets/images/posters/bombdevil.png') },
+  { id: 'beam', title: '빔 포스터', src: withBase('assets/images/posters/beamposter.png') },
+  { id: 'angel', title: '천사의 악마 포스터', src: withBase('assets/images/posters/angledevilposter.png') },
 ]
 
 const GalleryItem = ({ index, poster, onClick }) => {

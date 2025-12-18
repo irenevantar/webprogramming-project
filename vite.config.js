@@ -9,7 +9,7 @@ export default defineConfig({
     open: true,
     host: true
   },
-  base: './',
+  base: '/webprogramming-project/',
   publicDir: 'public',
   build: {
     rollupOptions: {

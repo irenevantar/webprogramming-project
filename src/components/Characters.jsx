@@ -1,6 +1,8 @@
 import { useState, useRef, useEffect, useCallback } from 'react'
 import { motion, AnimatePresence } from 'framer-motion'
 
+const withBase = (path) => `${import.meta.env.BASE_URL}${path}`
+
 // Character Data
 const CHARACTERS = [
   {
@@ -9,8 +11,8 @@ const CHARACTERS = [
     role: '체인소 맨',
     description: '체인소의 악마 포치타와 융합한 주인공. 평범한 삶을 꿈꾸는 데블 헌터로, 끊임없이 혼란에 휘말린다. 그의 꿈은 식빵에 잼을 발라 먹고 침대에서 자는 소박한 것이다.',
     images: [
-      '/assets/images/new_characters/denji.png',
-      '/assets/images/new_characters/chainsawman.png'
+      withBase('assets/images/new_characters/denji.png'),
+      withBase('assets/images/new_characters/chainsawman.png')
     ],
     width: '300px',
     height: '600px'
@@ -21,8 +23,8 @@ const CHARACTERS = [
     role: '폭탄의 악마',
     description: '폭탄의 악마로 알려진 하이브리드. 카페에서 일하는 순수한 소녀처럼 보이지만, 실제로는 체인소의 심장을 훔치기 위해 소련에서 파견된 훈련된 암살자다. 그녀의 폭발적인 힘은 그녀의 매력만큼이나 강력하다.',
     images: [
-      '/assets/images/reze.png',
-      '/assets/images/new_characters/bombdevil.png'
+      withBase('assets/images/reze.png'),
+      withBase('assets/images/new_characters/bombdevil.png')
     ],
     width: '300px',
     height: '600px'
@@ -32,42 +34,42 @@ const CHARACTERS = [
     name: '마키마',
     role: '지배의 악마',
     description: '공안 대마 특이 4과의 고위 데블 헌터. 교활하고 지적이며 인간과 악마 모두에게 두려움의 대상이다. 그녀는 사람들을 개로 여기며 절대적인 복종을 요구한다.',
-    images: ['/assets/images/new_characters/makima.png']
+    images: [withBase('assets/images/new_characters/makima.png')]
   },
   {
     id: 'aki',
     name: '하야카와 아키',
     role: '데블 헌터',
     description: '공안 대마 특이 4과 소속의 데블 헌터. 여우의 악마, 저주의 악마, 미래의 악마와 계약했다. 총의 악마에게 가족을 잃고 복수를 위해 살아가지만, 점차 동료들을 깊이 아끼게 된다.',
-    images: ['/assets/images/aki.png']
+    images: [withBase('assets/images/aki.png')]
   },
   {
     id: 'power',
     name: '파워',
     role: '피의 마인',
     description: '시체를 차지한 피의 마인. 유치하고 탐욕스러우며 고양이를 좋아하지만, 덴지의 가까운 동료가 된다. 종종 거짓말을 하고 위험에서 도망치지만, 숨겨진 의리가 있다.',
-    images: ['/assets/images/new_characters/power.png']
+    images: [withBase('assets/images/new_characters/power.png')]
   },
   {
     id: 'beam',
     name: '빔',
     role: '상어의 마인',
     description: '벽이나 바닥 같은 고체를 헤엄칠 수 있는 상어의 마인. "체인소 님"에게 광적으로 충성하며 종종 거칠고 예측할 수 없는 행동을 한다.',
-    images: ['/assets/images/new_characters/beam.png']
+    images: [withBase('assets/images/new_characters/beam.png')]
   },
   {
     id: 'angel',
     name: '천사의 악마',
     role: '천사의 악마',
     description: '천사의 공포를 구현한 악마. 닿기만 해도 수명을 흡수할 수 있으며, 훔친 시간으로 강력한 무기를 만든다. 강력한 힘에도 불구하고 게으르고 일하기 싫어한다.',
-    images: ['/assets/images/new_characters/angle devil.png']
+    images: [withBase('assets/images/new_characters/angle devil.png')]
   },
   {
     id: 'pochita',
     name: '포치타',
     role: '체인소의 악마',
     description: '약해진 강아지 모습의 원래 체인소 악마. 심장이 되어 덴지를 구했다. 그는 혼돈의 화신이자 지옥의 영웅이다.',
-    images: ['/assets/images/new_characters/pochita.png']
+    images: [withBase('assets/images/new_characters/pochita.png')]
   }
 ]
 
