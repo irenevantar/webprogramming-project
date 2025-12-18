@@ -162,6 +162,24 @@ const Trailers = () => {
               padding: '2rem',
             }}
           >
+            {/* Close Button */}
+            <button
+              onClick={() => setSelectedTrailer(null)}
+              style={{
+                position: 'absolute',
+                top: '2rem',
+                right: '2rem',
+                background: 'transparent',
+                border: 'none',
+                color: '#f97316',
+                fontSize: '3rem',
+                cursor: 'pointer',
+                zIndex: 10001,
+              }}
+            >
+              ✕
+            </button>
+
             {/* Navigation Buttons */}
             <button
               onClick={handlePrev}

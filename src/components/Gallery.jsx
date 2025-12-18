@@ -292,8 +292,8 @@ const Gallery = () => {
               right: '2rem',
               background: 'transparent',
               border: 'none',
-              color: '#fff',
-              fontSize: '2rem',
+              color: '#f97316',
+              fontSize: '3rem',
               cursor: 'pointer',
               zIndex: 10001,
             }}

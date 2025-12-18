@@ -288,6 +288,24 @@ const Characters = () => {
               justifyContent: 'center',
             }}
           >
+            {/* Close Button */}
+            <button
+              onClick={() => setSelectedChar(null)}
+              style={{
+                position: 'absolute',
+                top: '2rem',
+                right: '2rem',
+                background: 'transparent',
+                border: 'none',
+                color: '#f97316',
+                fontSize: '3rem',
+                cursor: 'pointer',
+                zIndex: 10001,
+              }}
+            >
+              ✕
+            </button>
+
             <motion.div
               initial={{ scale: 0.9, opacity: 0 }}
               animate={{ scale: 1, opacity: 1 }}
