@@ -377,7 +377,7 @@ const Characters = () => {
                       filter: 'drop-shadow(0 0 40px rgba(249, 115, 22, 0.4))',
                       transform: selectedChar.id === 'pochita' 
                         ? 'scale(0.4)' 
-                        : (['reze', 'aki'].includes(selectedChar.id) ? 'scale(0.5)' : 'scale(1.2)'),
+                        : (['reze', 'aki'].includes(selectedChar.id) ? 'scale(0.45)' : 'scale(1.44)'),
                       objectPosition: selectedChar.id === 'pochita' ? 'center center' : 'center center',
                     }}
                   />
@@ -400,7 +400,7 @@ const Characters = () => {
                   marginBottom: '1rem',
                   lineHeight: 1,
                 }}>
-                  {selectedChar.name}
+                  {selectedChar.name} <span style={{ fontSize: '1.5rem', color: '#fff', fontWeight: 500 }}>(V. {selectedChar.cv})</span>
                 </h2>
                 <p style={{
                   fontFamily: "'Nanum Gothic', sans-serif",
