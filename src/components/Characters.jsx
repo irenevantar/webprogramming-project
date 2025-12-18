@@ -380,10 +380,10 @@ const Characters = () => {
                       transform: selectedChar.id === 'pochita' 
                         ? 'scale(0.4)' 
                         : (['reze', 'aki'].includes(selectedChar.id) 
-                            ? 'scale(0.4)' 
+                            ? 'scale(0.135)' 
                             : (['denji', 'makima', 'power', 'beam', 'angel'].includes(selectedChar.id) && (transformState[selectedChar.id] || 0) === 0
-                                ? 'scale(1.1)' 
-                                : 'scale(1.7)')),
+                                ? 'scale(1.55) translateY(-10%)' 
+                                : 'scale(2.3) translateY(-10%)')),
                       objectPosition: (['denji', 'makima', 'power', 'beam', 'angel'].includes(selectedChar.id) && (transformState[selectedChar.id] || 0) === 0)
                         ? 'center 30%'
                         : (selectedChar.id === 'pochita' ? 'center center' : 'center center'),

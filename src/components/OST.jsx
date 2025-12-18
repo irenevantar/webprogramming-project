@@ -103,6 +103,7 @@ const LPPlayer = ({ data, isPlaying, onToggle, progress, onSeek }) => {
                <img 
                  src={data.cover} 
                  alt="Cover" 
+                 loading="lazy"
                  style={{ width: '100%', height: '100%', objectFit: 'cover' }}
                />
             </div>
@@ -249,10 +250,10 @@ const LPPlayer = ({ data, isPlaying, onToggle, progress, onSeek }) => {
             <div style={{ 
               display: 'flex', 
               justifyContent: 'space-between', 
-              fontSize: '1.2rem', 
-              fontWeight: 'bold',
+              fontSize: '1.3rem', 
+              fontWeight: 700,
               color: '#fff',
-              fontFamily: 'monospace' 
+              fontFamily: "'Nanum Gothic', sans-serif" 
             }}>
               <span>{formatTime(progress.currentTime)}</span>
               <span>{formatTime(progress.duration)}</span>
@@ -459,6 +460,7 @@ const OST = () => {
           cursor: pointer;
           box-shadow: 0 0 10px rgba(255, 153, 0, 0.5);
           margin-top: -6px; /* Adjust for alignment */
+          transform: translateY(1px);
         }
         .ost-range-opening::-moz-range-thumb {
           width: 20px;
@@ -468,6 +470,7 @@ const OST = () => {
           cursor: pointer;
           border: none;
           box-shadow: 0 0 10px rgba(255, 153, 0, 0.5);
+          transform: translateY(1px);
         }
         
         .ost-range-ending::-webkit-slider-thumb {
@@ -480,6 +483,7 @@ const OST = () => {
           cursor: pointer;
           box-shadow: 0 0 10px rgba(128, 0, 128, 0.5);
           margin-top: -6px;
+          transform: translateY(1px);
         }
         .ost-range-ending::-moz-range-thumb {
           width: 20px;
@@ -489,6 +493,7 @@ const OST = () => {
           cursor: pointer;
           border: none;
           box-shadow: 0 0 10px rgba(128, 0, 128, 0.5);
+          transform: translateY(1px);
         }
       `}</style>
     </section>
