@@ -281,8 +281,8 @@ const Characters = () => {
               exit={{ scale: 0.9, opacity: 0 }}
               onClick={(e) => e.stopPropagation()}
               style={{
-                width: '90%',
-                maxWidth: '1200px',
+                width: '100%',
+                maxWidth: 'calc(100vw - 150px)',
                 height: '80vh',
                 background: '#0a0a0a',
                 border: '1px solid rgba(249, 115, 22, 0.3)',
