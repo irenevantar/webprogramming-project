@@ -164,9 +164,9 @@ const Characters = () => {
           justifyContent: 'center',
           gap: '1rem'
         }}>
-          <ScrollReveal as="span" className="text-gradient">[</ScrollReveal>
-          <ScrollReveal as="span" className="text-gradient">등장인물</ScrollReveal>
-          <ScrollReveal as="span" className="text-gradient">]</ScrollReveal>
+          <ScrollReveal as="span" style={{ color: '#f97316' }}>[</ScrollReveal>
+          <ScrollReveal as="span">등장인물</ScrollReveal>
+          <ScrollReveal as="span" style={{ color: '#f97316' }}>]</ScrollReveal>
         </h2>
       </div>
 
@@ -191,8 +191,8 @@ const Characters = () => {
         <style>{`.no-scrollbar::-webkit-scrollbar { display: none; }`}</style>
         
         {CHARACTERS.map((char) => {
-          const isSmallChar = char.id === 'reze' || char.id === 'aki'
-          const cardWidth = isSmallChar ? '240px' : (char.width || '300px')
+          const isSmallChar = char.id === 'reze'
+          const cardWidth = char.id === 'aki' ? '350px' : (isSmallChar ? '240px' : (char.width || '300px'))
           // Fixed height for all image containers to ensure alignment
           const cardHeight = '500px'
 
@@ -230,9 +230,11 @@ const Characters = () => {
                     objectFit: 'contain',
                     objectPosition: ['reze', 'aki'].includes(char.id) ? 'center bottom' : 'center 20%',
                     filter: 'drop-shadow(0 0 20px rgba(249, 115, 22, 0.2))',
-                    transform: char.id === 'pochita' 
-                      ? 'scale(0.5)' 
-                      : (['reze', 'aki'].includes(char.id) ? 'scale(0.8)' : 'scale(1.2)'),
+                    transform: char.id === 'reze' 
+                      ? 'scale(0.8)' 
+                      : (char.id === 'aki' 
+                          ? 'scale(0.9)' 
+                          : (char.id === 'pochita' ? 'scale(1.2) translateY(10%)' : 'scale(1.2)')),
                   }}
                 />
               </div>
@@ -377,8 +379,14 @@ const Characters = () => {
                       filter: 'drop-shadow(0 0 40px rgba(249, 115, 22, 0.4))',
                       transform: selectedChar.id === 'pochita' 
                         ? 'scale(0.4)' 
-                        : (['reze', 'aki'].includes(selectedChar.id) ? 'scale(0.4)' : 'scale(1.7)'),
-                      objectPosition: selectedChar.id === 'pochita' ? 'center center' : 'center center',
+                        : (['reze', 'aki'].includes(selectedChar.id) 
+                            ? 'scale(0.4)' 
+                            : (['denji', 'makima', 'power', 'beam', 'angel'].includes(selectedChar.id) && (transformState[selectedChar.id] || 0) === 0
+                                ? 'scale(1.1)' 
+                                : 'scale(1.7)')),
+                      objectPosition: (['denji', 'makima', 'power', 'beam', 'angel'].includes(selectedChar.id) && (transformState[selectedChar.id] || 0) === 0)
+                        ? 'center 30%'
+                        : (selectedChar.id === 'pochita' ? 'center center' : 'center center'),
                     }}
                   />
                 </AnimatePresence>
@@ -412,10 +420,11 @@ const Characters = () => {
                   {selectedChar.role}
                 </p>
                 <p style={{
-                  fontSize: '1.125rem',
+                  fontSize: '1.5rem',
                   lineHeight: 1.8,
                   color: '#d1d5db',
                   marginBottom: '3rem',
+                  fontWeight: 300,
                 }}>
                   {selectedChar.description}
                 </p>
@@ -436,7 +445,7 @@ const Characters = () => {
                       boxShadow: '0 4px 15px rgba(249, 115, 22, 0.2)',
                     }}
                   >
-                    <span className="text-gradient">악마화</span>
+                    <span style={{ color: '#FF9900' }}>악마화</span>
                   </button>
                 )}
               </div>

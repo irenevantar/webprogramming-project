@@ -105,7 +105,8 @@ const Trailers = () => {
                   <div style={{
                     width: '60px',
                     height: '60px',
-                    background: 'rgba(249, 115, 22, 0.9)',
+                    background: '#000',
+                    border: '2px solid #f97316',
                     borderRadius: '50%',
                     display: 'flex',
                     alignItems: 'center',
@@ -116,7 +117,7 @@ const Trailers = () => {
                       height: 0,
                       borderTop: '10px solid transparent',
                       borderBottom: '10px solid transparent',
-                      borderLeft: '16px solid white',
+                      borderLeft: '16px solid #f97316',
                       marginLeft: '4px',
                     }} />
                   </div>
