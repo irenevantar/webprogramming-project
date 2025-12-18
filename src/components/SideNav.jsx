@@ -7,9 +7,10 @@ const SideNav = ({ isVisible }) => {
   const navItems = [
     { id: 'hero', label: '홈' },
     { id: 'characters', label: '등장인물' },
-    { id: 'story', label: '줄거리' },
+    { id: 'story', label: '시놉시스' },
     { id: 'gallery', label: '포스터' },
     { id: 'trailers', label: '예고편' },
+    { id: 'staff', label: '제작진' },
   ]
 
   useEffect(() => {

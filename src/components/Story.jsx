@@ -39,7 +39,7 @@ const Story = () => {
         >
           <ScrollReveal as="span" style={{ color: '#f97316' }}>[</ScrollReveal>
           <ScrollReveal as="span" baseRotation={5} enableBlur={true}>
-            줄거리
+            시놉시스
           </ScrollReveal>
           <ScrollReveal as="span" style={{ color: '#f97316' }}>]</ScrollReveal>
         </h2>

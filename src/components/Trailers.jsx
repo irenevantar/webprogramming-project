@@ -208,8 +208,8 @@ const Trailers = () => {
             </button>
 
             <div style={{
-              width: '100%',
-              maxWidth: 'calc(100vw - 150px)',
+              width: '90%',
+              maxWidth: 'calc(90vw - 150px)',
               aspectRatio: '16 / 9',
               position: 'relative',
               display: 'flex',

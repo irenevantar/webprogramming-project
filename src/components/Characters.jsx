@@ -281,9 +281,9 @@ const Characters = () => {
               exit={{ scale: 0.9, opacity: 0 }}
               onClick={(e) => e.stopPropagation()}
               style={{
-                width: '100%',
-                maxWidth: 'calc(100vw - 150px)',
-                height: '80vh',
+                width: '90%',
+                maxWidth: 'calc(90vw - 150px)',
+                height: '72vh',
                 background: '#0a0a0a',
                 border: '1px solid rgba(249, 115, 22, 0.3)',
                 borderRadius: '20px',
@@ -364,7 +364,7 @@ const Characters = () => {
                       height: '100%',
                       objectFit: 'contain',
                       filter: 'drop-shadow(0 0 40px rgba(249, 115, 22, 0.4))',
-                      transform: (['reze', 'aki', 'pochita'].includes(selectedChar.id)) ? 'scale(0.8)' : 'scale(1.2)',
+                      transform: (['reze', 'aki', 'pochita'].includes(selectedChar.id)) ? 'scale(0.65)' : 'scale(1.2)',
                     }}
                   />
                 </AnimatePresence>

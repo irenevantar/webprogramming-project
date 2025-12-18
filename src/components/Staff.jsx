@@ -2,12 +2,23 @@ import { motion } from 'framer-motion'
 import ScrollReveal from './ScrollReveal'
 
 const STAFF_DATA = [
-  { role: '원작', name: '후지모토 타츠키' },
   { role: '감독', name: '나카야마 류' },
   { role: '각본', name: '세코 히로시' },
+  { role: '부감독', name: '나카조노 마토' },
   { role: '캐릭터 디자인', name: '스기야마 카즈타카' },
-  { role: '액션 디렉터', name: '요시하라 타츠야' },
+  { role: '서브 캐릭터 디자인', name: '야마자키 소타 / 슌' },
+  { role: '메인 애니메이터', name: '쇼이치' },
+  { role: '액션 디렉터', name: '시게츠구 소타' },
+  { role: '악마 디자인', name: '마츠우라 리키 / 오시야마 시쿄타카' },
+  { role: '의상 디자인', name: '야마토 아야' },
+  { role: '미술감독', name: '타케다 유스케' },
+  { role: '색채설계', name: '나카노 나오미' },
+  { role: '컬러 스크립트', name: '리쿠' },
+  { role: '3DCG 디렉터', name: '와타나베 다이키 / 타마이 마시로' },
+  { role: '촬영감독', name: '이토 텟페이' },
+  { role: '편집', name: '요시타케 마사토' },
   { role: '음악', name: '우시오 켄스케' },
+  { role: '배급', name: '토호' },
   { role: '제작', name: 'MAPPA' },
 ]
 
