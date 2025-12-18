@@ -1,5 +1,6 @@
 import { useState, useRef, useEffect, useCallback } from 'react'
 import { motion, AnimatePresence } from 'framer-motion'
+import ScrollReveal from './ScrollReveal'
 
 const withBase = (path) => `${import.meta.env.BASE_URL}${path}`
 
@@ -150,9 +151,14 @@ const Characters = () => {
           fontWeight: 700,
           fontFamily: "'Nanum Gothic', sans-serif",
           color: '#fff',
-          marginBottom: '1rem'
+          marginBottom: '1rem',
+          display: 'flex',
+          justifyContent: 'center',
+          gap: '1rem'
         }}>
-          <span style={{ color: '#f97316' }}>[</span> 등장인물 <span style={{ color: '#f97316' }}>]</span>
+          <ScrollReveal as="span" style={{ color: '#f97316' }}>[</ScrollReveal>
+          <ScrollReveal as="span">등장인물</ScrollReveal>
+          <ScrollReveal as="span" style={{ color: '#f97316' }}>]</ScrollReveal>
         </h2>
       </div>
 
@@ -163,64 +169,73 @@ const Characters = () => {
         onMouseLeave={() => { scrollSpeed.current = 0 }}
         style={{
           display: 'flex',
-          alignItems: 'center',
+          alignItems: 'flex-end', // Changed from center to align names
           gap: '4rem',
           overflowX: 'auto',
           padding: '2rem 4rem',
           scrollbarWidth: 'none', // Firefox
           msOverflowStyle: 'none', // IE/Edge
           cursor: 'grab',
+          minHeight: '650px', // Ensure enough space
         }}
         className="no-scrollbar"
       >
         <style>{`.no-scrollbar::-webkit-scrollbar { display: none; }`}</style>
         
-        {CHARACTERS.map((char) => (
-          <motion.div
-            key={char.id}
-            onClick={() => setSelectedChar(char)}
-            whileHover={{ scale: 1.05, y: -10 }}
-            className="character-card"
-            style={{
-              flex: '0 0 auto',
-              display: 'flex',
-              flexDirection: 'column',
-              alignItems: 'center',
-              cursor: 'pointer',
-              width: char.width || '300px',
-            }}
-          >
-            <div style={{
-              width: char.width || '300px',
-              height: char.height || '600px',
-              marginBottom: '1.5rem',
-              position: 'relative',
-              overflow: 'hidden',
-              borderRadius: '12px',
-            }}>
-              <img
-                src={char.images[0]}
-                alt={char.name}
-                loading="lazy"
-                style={{
-                  width: '100%',
-                  height: '100%',
-                  objectFit: 'cover',
-                  objectPosition: 'center top',
-                  filter: 'drop-shadow(0 0 20px rgba(249, 115, 22, 0.2))',
-                }}
-              />
-            </div>
-            <h3 style={{
-              fontSize: '1.5rem',
-              fontWeight: 800,
-              color: '#f97316',
-              letterSpacing: '0.1em',
-            }}>
-              {char.name}
-            </h3>
-          </motion.div>
-        ))}
+        {CHARACTERS.map((char) => {
+          const isSmallChar = char.id === 'reze' || char.id === 'aki'
+          const cardWidth = isSmallChar ? '240px' : (char.width || '300px')
+          // Fixed height for all image containers to ensure alignment
+          const cardHeight = '500px'
+
+          return (
+            <motion.div
+              key={char.id}
+              onClick={() => setSelectedChar(char)}
+              whileHover={{ scale: 1.05, y: -10 }}
+              className="character-card"
+              style={{
+                flex: '0 0 auto',
+                display: 'flex',
+                flexDirection: 'column',
+                alignItems: 'center',
+                cursor: 'pointer',
+                width: cardWidth,
+              }}
+            >
+              <div style={{
+                width: cardWidth,
+                height: cardHeight,
+                marginBottom: '1.5rem',
+                position: 'relative',
+                overflow: 'hidden',
+                borderRadius: '12px',
+                background: 'rgba(255, 255, 255, 0.05)', // Subtle background for transparent images
+              }}>
+                <img
+                  src={char.images[0]}
+                  alt={char.name}
+                  loading="lazy"
+                  style={{
+                    width: '100%',
+                    height: '100%',
+                    objectFit: char.id === 'reze' ? 'contain' : 'cover', // Special handling for Reze
+                    objectPosition: 'center bottom', // Align image to bottom
+                    filter: 'drop-shadow(0 0 20px rgba(249, 115, 22, 0.2))',
+                  }}
+                />
+              </div>
+              <h3 style={{
+                fontSize: '1.5rem',
+                fontWeight: 800,
+                color: '#f97316',
+                letterSpacing: '0.1em',
+              }}>
+                {char.name}
+              </h3>
+            </motion.div>
+          )
+        })}
       </div>
 
       {/* Instruction Text */}
@@ -281,7 +296,7 @@ const Characters = () => {
               <button
                 onClick={handlePrev}
                 style={{
-                  position: 'absolute',
+                  position: 'fixed',
                   left: '20px',
                   top: '50%',
                   transform: 'translateY(-50%)',
@@ -291,7 +306,7 @@ const Characters = () => {
                   width: '60px',
                   height: '60px',
                   cursor: 'pointer',
-                  zIndex: 10,
+                  zIndex: 10000,
                   fontSize: '3rem',
                   fontWeight: 'bold',
                   display: 'flex',
@@ -304,7 +319,7 @@ const Characters = () => {
               <button
                 onClick={handleNext}
                 style={{
-                  position: 'absolute',
+                  position: 'fixed',
                   right: '20px',
                   top: '50%',
                   transform: 'translateY(-50%)',
@@ -314,7 +329,7 @@ const Characters = () => {
                   width: '60px',
                   height: '60px',
                   cursor: 'pointer',
-                  zIndex: 10,
+                  zIndex: 10000,
                   fontSize: '3rem',
                   fontWeight: 'bold',
                   display: 'flex',
@@ -333,21 +348,26 @@ const Characters = () => {
                 alignItems: 'center',
                 justifyContent: 'center',
                 padding: '2rem',
+                overflow: 'hidden', // Added overflow hidden
               }}>
-                <motion.img
-                  key={`${selectedChar.id}-${transformState[selectedChar.id] || 0}`}
-                  initial={{ opacity: 0, x: -20 }}
-                  animate={{ opacity: 1, x: 0 }}
-                  transition={{ duration: 0.4 }}
-                  src={selectedChar.images[transformState[selectedChar.id] || 0]}
-                  alt={selectedChar.name}
-                  style={{
-                    width: '100%',
-                    height: '100%',
-                    objectFit: 'contain',
-                    filter: 'drop-shadow(0 0 40px rgba(249, 115, 22, 0.4))',
-                  }}
-                />
+                <AnimatePresence mode='wait'>
+                  <motion.img
+                    key={`${selectedChar.id}-${transformState[selectedChar.id] || 0}`}
+                    initial={{ opacity: 0, x: -20 }}
+                    animate={{ opacity: 1, x: 0 }}
+                    exit={{ opacity: 0, x: 20 }}
+                    transition={{ duration: 0.4 }}
+                    src={selectedChar.images[transformState[selectedChar.id] || 0]}
+                    alt={selectedChar.name}
+                    style={{
+                      width: '100%',
+                      height: '100%',
+                      objectFit: 'contain',
+                      filter: 'drop-shadow(0 0 40px rgba(249, 115, 22, 0.4))',
+                      transform: (['reze', 'aki', 'pochita'].includes(selectedChar.id)) ? 'scale(0.8)' : 'scale(1.2)',
+                    }}
+                  />
+                </AnimatePresence>
               </div>
 
               {/* Right: Info */}

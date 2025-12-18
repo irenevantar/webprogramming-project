@@ -33,6 +33,7 @@ const ScrollReveal = ({
     if (!el) return
 
     const charElements = el.querySelectorAll('.char')
+    const hasChars = charElements.length > 0
     
     const tl = gsap.timeline({
       scrollTrigger: {
@@ -51,20 +52,30 @@ const ScrollReveal = ({
       0
     )
 
-    // Char opacity
-    tl.fromTo(
-      charElements,
-      { opacity: baseOpacity, willChange: 'opacity' },
-      { opacity: 1, stagger: 0.02, ease: 'none', duration: 1 },
-      0
-    )
-
-    // Char blur
-    if (enableBlur) {
+    if (hasChars) {
+      // Char opacity
       tl.fromTo(
         charElements,
-        { filter: `blur(${blurStrength}px)` },
-        { filter: 'blur(0px)', stagger: 0.02, ease: 'none', duration: 1 },
+        { opacity: baseOpacity, willChange: 'opacity' },
+        { opacity: 1, stagger: 0.02, ease: 'none', duration: 1 },
+        0
+      )
+
+      // Char blur
+      if (enableBlur) {
+        tl.fromTo(
+          charElements,
+          { filter: `blur(${blurStrength}px)` },
+          { filter: 'blur(0px)', stagger: 0.02, ease: 'none', duration: 1 },
+          0
+        )
+      }
+    } else {
+      // Fallback for non-text content: animate container opacity/blur
+      tl.fromTo(
+        el,
+        { opacity: baseOpacity, filter: enableBlur ? `blur(${blurStrength}px)` : 'none' },
+        { opacity: 1, filter: 'blur(0px)', ease: 'none', duration: 1 },
         0
       )
     }
@@ -77,7 +88,7 @@ const ScrollReveal = ({
 
   return (
     <Component ref={containerRef} className={className} style={style}>
-      {splitText}
+      {typeof children === 'string' ? splitText : children}
     </Component>
   )
 }

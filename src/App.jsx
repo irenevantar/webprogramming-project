@@ -8,6 +8,8 @@ import Cursor from './components/Cursor'
 const Characters = lazy(() => import('./components/Characters'))
 const Story = lazy(() => import('./components/Story'))
 const Gallery = lazy(() => import('./components/Gallery'))
+const Trailers = lazy(() => import('./components/Trailers'))
+const Staff = lazy(() => import('./components/Staff'))
 const Footer = lazy(() => import('./components/Footer'))
 
 function App() {
@@ -44,6 +46,8 @@ function App() {
                 <Characters />
                 <Story />
                 <Gallery />
+                <Trailers />
+                <Staff />
               </Suspense>
             </main>
             <Suspense fallback={null}>

@@ -188,7 +188,7 @@ const Gallery = () => {
           <button
             onClick={handlePrev}
             style={{
-              position: 'absolute',
+              position: 'fixed',
               left: '20px',
               top: '50%',
               transform: 'translateY(-50%)',
@@ -211,7 +211,7 @@ const Gallery = () => {
           <button
             onClick={handleNext}
             style={{
-              position: 'absolute',
+              position: 'fixed',
               right: '20px',
               top: '50%',
               transform: 'translateY(-50%)',
@@ -240,33 +240,49 @@ const Gallery = () => {
             onClick={(e) => e.stopPropagation()}
             style={{
               position: 'relative',
-              maxWidth: '90%',
+              maxWidth: 'calc(100vw - 150px)',
               maxHeight: '90vh',
               display: 'flex',
               flexDirection: 'column',
               alignItems: 'center',
             }}
           >
-            <img
-              src={selectedPoster.src}
-              alt={selectedPoster.title}
-              style={{
-                maxWidth: '100%',
-                maxHeight: '85vh',
-                objectFit: 'contain',
-                borderRadius: '8px',
-                boxShadow: '0 0 50px rgba(249, 115, 22, 0.2)',
-              }}
-            />
-            <p style={{
-              color: '#fff',
-              marginTop: '1rem',
-              fontFamily: "'Nanum Gothic', sans-serif",
-              fontSize: '1.25rem',
-              fontWeight: 700,
-            }}>
-              {selectedPoster.title}
-            </p>
+            <AnimatePresence mode='wait'>
+              <motion.div
+                key={selectedPoster.id}
+                initial={{ opacity: 0, x: 20 }}
+                animate={{ opacity: 1, x: 0 }}
+                exit={{ opacity: 0, x: -20 }}
+                transition={{ duration: 0.3 }}
+                style={{
+                  display: 'flex',
+                  flexDirection: 'column',
+                  alignItems: 'center',
+                  width: '100%',
+                }}
+              >
+                <img
+                  src={selectedPoster.src}
+                  alt={selectedPoster.title}
+                  style={{
+                    maxWidth: '100%',
+                    maxHeight: '85vh',
+                    objectFit: 'contain',
+                    borderRadius: '8px',
+                    boxShadow: '0 0 50px rgba(249, 115, 22, 0.2)',
+                  }}
+                />
+                <p style={{
+                  color: '#fff',
+                  marginTop: '1rem',
+                  fontFamily: "'Nanum Gothic', sans-serif",
+                  fontSize: '1.25rem',
+                  fontWeight: 700,
+                }}>
+                  {selectedPoster.title}
+                </p>
+              </motion.div>
+            </AnimatePresence>
           </motion.div>
           
           {/* Close Button */}
