@@ -2,8 +2,9 @@ import { useState, useEffect, lazy, Suspense } from 'react'
 import { motion, AnimatePresence } from 'framer-motion'
 import Hero from './components/Hero'
 import Loader from './components/Loader'
-import SideNav from './components/SideNav'
+import Dock from './components/Dock'
 import Cursor from './components/Cursor'
+import BackgroundEffect from './components/BackgroundEffect'
 
 const Characters = lazy(() => import('./components/Characters'))
 const Story = lazy(() => import('./components/Story'))
@@ -34,7 +35,8 @@ function App() {
       {!loading && (
         <>
           <Cursor />
-          <SideNav isVisible={isScrolled} />
+          <BackgroundEffect />
+          <Dock />
           <motion.div
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}

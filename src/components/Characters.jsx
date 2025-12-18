@@ -364,7 +364,10 @@ const Characters = () => {
                       height: '100%',
                       objectFit: 'contain',
                       filter: 'drop-shadow(0 0 40px rgba(249, 115, 22, 0.4))',
-                      transform: (['reze', 'aki', 'pochita'].includes(selectedChar.id)) ? 'scale(0.65)' : 'scale(1.2)',
+                      transform: selectedChar.id === 'pochita' 
+                        ? 'scale(0.4)' 
+                        : (['reze', 'aki'].includes(selectedChar.id) ? 'scale(0.5)' : 'scale(1.2)'),
+                      objectPosition: selectedChar.id === 'pochita' ? 'center center' : 'center center',
                     }}
                   />
                 </AnimatePresence>
